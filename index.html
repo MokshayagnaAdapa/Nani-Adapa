@@ -105,8 +105,8 @@ body{background:#0d0007;color:#fff;font-family:'Lato',sans-serif;overflow-x:hidd
 @keyframes flicker{0%{transform:scaleX(1) scaleY(1) rotate(-2deg);}100%{transform:scaleX(0.75) scaleY(1.12) rotate(2deg);}}
 
 /* ===== CELEBRATION ===== */
-#s-celeb{display:none;min-height:100svh;flex-direction:column;align-items:center;justify-content:center;padding:4rem 1.5rem;position:relative;overflow:hidden;}
-#s-celeb.active{display:flex;}
+#s-celeb{display:none;min-height:100svh;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;position:relative;overflow:hidden;}
+#s-celeb.active{display:flex;height:100svh;}
 #celeb-bg{position:absolute;inset:0;z-index:0;}
 #celeb-bg-img{
   position:absolute;inset:0;
@@ -169,6 +169,8 @@ body{background:#0d0007;color:#fff;font-family:'Lato',sans-serif;overflow-x:hidd
     <div class="loading-photos">Loading your memories... 💖</div>
   </div>
   <div class="upload-area">
+    <button class="upload-btn" onclick="document.getElementById('photoInput').click()">✦ Add More Photos ✦</button>
+    <br>
     <button class="upload-btn btn-gold" onclick="goToLetter()">Continue to Her Letter →</button>
     <p class="upload-note">her photos are loading automatically 💕</p>
   </div>
@@ -271,8 +273,8 @@ const GITHUB_USER = 'MokshayagnaAdapa';
 const GITHUB_REPO = 'Nani-Adapa';
 const GITHUB_BRANCH = 'main';
 const PHOTO_NAMES = [
-  'Sruthi-1.jpeg','Sruthi-3.jpeg','Sruthi-4.jpeg','Sruthi-5.jpeg',
-  'Sruthi-6.jpeg','Sruthi-7.jpeg','Sruthi-9.jpeg','Sruthi-10.jpeg'
+  'Sruthi-1.jpeg','Sruthi-2.jpeg','Sruthi-3.jpeg','Sruthi-4.jpeg','Sruthi-5.jpeg',
+  'Sruthi-6.jpeg','Sruthi-7.jpeg','Sruthi-8.jpeg','Sruthi-9.jpeg','Sruthi-10.jpeg'
 ];
 
 // Build raw GitHub URLs
@@ -334,7 +336,14 @@ document.getElementById('photoInput').addEventListener('change',function(e){
 const captions=['forever 💕','my world ✨','beautiful soul','just you 🌹','my love 💗','precious 💖','you&me','always 💖','my heart 💗','sunshine ✨'];
 const lightColors=['#e8547a','#d4a955','#f7c5d5','#c0365a','#ffe080','#a0d8ff','#d4a955','#ffc0e0','#e8547a','#fff080'];
 const frameTints=['#fff8f9','#fff9f0','#fff5f8','#fffaf0','#fff0f5'];
-const PER_ROW=3;
+function getPER_ROW(){
+  const w=window.innerWidth;
+  if(w>=1024)return 4;
+  if(w>=600)return 3;
+  return 2;
+}
+let PER_ROW=getPER_ROW();
+window.addEventListener('resize',()=>{const n=getPER_ROW();if(n!==PER_ROW){PER_ROW=n;if(document.getElementById('s-gallery').style.display!=='none')buildRopeWall();}});
 
 function buildRopeWall(){
   const wall=document.getElementById('ropeWall');
@@ -465,7 +474,7 @@ function cutCake(){
 
     // Use Sruthi-1 (first photo) as full-screen background on celebration
     const bgImg=document.getElementById('celeb-bg-img');
-    const bgSrc = ghUrl('Sruthi-2.jpeg');
+    const bgSrc = ghUrl('Sruthi-1.jpeg');
     bgImg.style.display='block';
     bgImg.src=bgSrc;
     bgImg.crossOrigin='anonymous';
