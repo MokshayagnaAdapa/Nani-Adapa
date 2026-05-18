@@ -346,7 +346,7 @@ function buildRopeWall(){
   const wall=document.getElementById('ropeWall');
   wall.innerHTML='';
   // photo size based on columns
-  const sizeMap={2:['42vw','34vw'],3:['26vw','20vw'],4:['18vw','14vw']};
+  const sizeMap={2:['38vw','34vw'],3:['26vw','20vw'],4:['18vw','14vw']};
   const [pw,ph]=sizeMap[PER_ROW]||sizeMap[3];
   document.documentElement.style.setProperty('--photo-w',pw);
   document.documentElement.style.setProperty('--photo-h',ph);
