@@ -273,7 +273,7 @@ body{background:#0d0007;color:#fff;font-family:'Lato',sans-serif;overflow-x:hidd
   </div>
 </section>
 
-<button id="music-btn" onclick="toggleMusic()" title="Toggle music">🎵</button>
+<!-- <button id="music-btn" onclick="toggleMusic()" title="Toggle music">🎵</button> -->
 
 <script>
 // ===== GITHUB PHOTO CONFIG =====
@@ -479,7 +479,7 @@ function goToLetter(){
   fadeOut(()=>{
     document.getElementById('s-gallery').style.display='none';
     document.getElementById('s-letter').classList.add('active');
-    document.getElementById('music-btn').classList.add('visible');
+    // document.getElementById('music-btn').classList.add('visible');
     buildLetterFloaties();window.scrollTo(0,0);fadeIn();
     setTimeout(()=>document.getElementById('letterCard').classList.add('vis'),300);
     setTimeout(()=>startMusic(),800);
