@@ -55,7 +55,7 @@ body{background:#0d0007;color:#fff;font-family:'Lato',sans-serif;overflow-x:hidd
 .hang-string::before{content:'';position:absolute;top:-3px;left:50%;transform:translateX(-50%);width:7px;height:7px;background:radial-gradient(circle,#ffe080,#d4a955);border-radius:50%;box-shadow:0 0 8px rgba(212,169,85,0.9),0 0 18px rgba(212,169,85,0.4);}
 .photo-frame{position:relative;background:#fff;padding:6px 6px 22px;box-shadow:0 10px 35px rgba(0,0,0,0.75),0 3px 10px rgba(232,84,122,0.2),inset 0 0 0 1px rgba(0,0,0,0.08);border-radius:2px;cursor:pointer;transition:box-shadow 0.3s ease,transform 0.2s ease;z-index:2;}
 .photo-frame:active{box-shadow:0 18px 55px rgba(232,84,122,0.55),0 6px 20px rgba(0,0,0,0.8) !important;transform:scale(1.08) rotate(0deg) !important;}
-.photo-frame img,.photo-frame .photo-demo{display:block;width:clamp(90px,22vw,140px);height:clamp(72px,17vw,110px);object-fit:cover;}
+.photo-frame img,.photo-frame .photo-demo{display:block;width:var(--photo-w,clamp(90px,22vw,140px));height:var(--photo-h,clamp(72px,17vw,110px));object-fit:cover;}
 .photo-demo{display:flex;align-items:center;justify-content:center;font-size:clamp(1.5rem,6vw,2.5rem);}
 .photo-caption{position:absolute;bottom:4px;left:0;right:0;text-align:center;font-family:'Dancing Script',cursive;font-size:clamp(0.6rem,2.5vw,0.78rem);color:#6a3a50;letter-spacing:0.5px;}
 
@@ -345,6 +345,11 @@ window.addEventListener('resize',()=>{const n=getPER_ROW();if(n!==PER_ROW){PER_R
 function buildRopeWall(){
   const wall=document.getElementById('ropeWall');
   wall.innerHTML='';
+  // photo size based on columns
+  const sizeMap={2:['42vw','34vw'],3:['26vw','20vw'],4:['18vw','14vw']};
+  const [pw,ph]=sizeMap[PER_ROW]||sizeMap[3];
+  document.documentElement.style.setProperty('--photo-w',pw);
+  document.documentElement.style.setProperty('--photo-h',ph);
   const rows=Math.ceil(photos.length/PER_ROW);
   for(let r=0;r<rows;r++){
     const rowPhs=photos.slice(r*PER_ROW,(r+1)*PER_ROW);
