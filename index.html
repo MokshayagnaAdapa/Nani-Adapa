@@ -479,7 +479,7 @@ function goToLetter(){
   fadeOut(()=>{
     document.getElementById('s-gallery').style.display='none';
     document.getElementById('s-letter').classList.add('active');
-    // document.getElementById('music-btn').classList.add('visible');
+    document.getElementById('music-btn').classList.add('visible');
     buildLetterFloaties();window.scrollTo(0,0);fadeIn();
     setTimeout(()=>document.getElementById('letterCard').classList.add('vis'),300);
     setTimeout(()=>startMusic(),800);
