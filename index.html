@@ -69,6 +69,11 @@ body{background:#0d0007;color:#fff;font-family:'Lato',sans-serif;overflow-x:hidd
 .btn-gold:active{border-color:rgba(212,169,85,0.9);box-shadow:0 0 25px rgba(212,169,85,0.3);color:#fff;}
 .upload-note{font-size:clamp(0.7rem,2.8vw,0.78rem);color:rgba(247,197,213,0.3);font-family:'Lato',sans-serif;letter-spacing:1px;margin-top:0.8rem;}
 
+/* ===== MUSIC BTN ===== */
+#music-btn{position:fixed;bottom:1.5rem;right:1.5rem;z-index:99997;width:44px;height:44px;border-radius:50%;background:rgba(232,84,122,0.15);border:1px solid rgba(232,84,122,0.4);color:#f7c5d5;font-size:1.2rem;cursor:pointer;display:none;align-items:center;justify-content:center;backdrop-filter:blur(10px);transition:all 0.3s ease;animation:hb 2s ease-in-out infinite;}
+#music-btn:active{background:rgba(232,84,122,0.35);}
+#music-btn.visible{display:flex;}
+
 /* ===== LETTER ===== */
 #s-letter{display:none;min-height:100svh;align-items:center;justify-content:center;padding:5rem 1.2rem 4rem;position:relative;overflow:hidden;background:linear-gradient(180deg,#0d0007,#120008,#0d0007);}
 #s-letter.active{display:flex;}
@@ -173,6 +178,11 @@ body{background:#0d0007;color:#fff;font-family:'Lato',sans-serif;overflow-x:hidd
   </div>
 </section>
 
+<!-- AUDIO -->
+<audio id="bgAudio" loop preload="auto">
+  <source src="https://raw.githubusercontent.com/MokshayagnaAdapa/Nani-Adapa/main/audio.mp3" type="audio/mpeg">
+</audio>
+
 <!-- ===== LETTER ===== -->
 <section id="s-letter">
   <div class="letter-floaties" id="letterFloaties"></div>
@@ -262,6 +272,8 @@ body{background:#0d0007;color:#fff;font-family:'Lato',sans-serif;overflow-x:hidd
     <div class="celeb-love">💖 I love you, &amp; Miss you forever 💖 </div>
   </div>
 </section>
+
+<button id="music-btn" onclick="toggleMusic()" title="Toggle music">🎵</button>
 
 <script>
 // ===== GITHUB PHOTO CONFIG =====
@@ -434,6 +446,25 @@ function buildLetterFloaties(){
   }
 }
 
+// MUSIC
+const audio=document.getElementById('bgAudio');
+let musicPlaying=false;
+function startMusic(){
+  audio.volume=0;
+  audio.play().then(()=>{
+    musicPlaying=true;
+    document.getElementById('music-btn').textContent='🎵';
+    // fade in volume
+    let v=0;
+    const fade=setInterval(()=>{v=Math.min(v+0.05,0.5);audio.volume=v;if(v>=0.5)clearInterval(fade);},120);
+  }).catch(()=>{});
+}
+function toggleMusic(){
+  const btn=document.getElementById('music-btn');
+  if(musicPlaying){audio.pause();musicPlaying=false;btn.textContent='🔇';}
+  else{audio.play();musicPlaying=true;btn.textContent='🎵';}
+}
+
 // NAV
 function enterWorld(){
   fadeOut(()=>{
@@ -448,8 +479,10 @@ function goToLetter(){
   fadeOut(()=>{
     document.getElementById('s-gallery').style.display='none';
     document.getElementById('s-letter').classList.add('active');
+    document.getElementById('music-btn').classList.add('visible');
     buildLetterFloaties();window.scrollTo(0,0);fadeIn();
     setTimeout(()=>document.getElementById('letterCard').classList.add('vis'),300);
+    setTimeout(()=>startMusic(),800);
   });
 }
 function goToCake(){
