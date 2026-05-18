@@ -169,10 +169,7 @@ body{background:#0d0007;color:#fff;font-family:'Lato',sans-serif;overflow-x:hidd
     <div class="loading-photos">Loading your memories... 💖</div>
   </div>
   <div class="upload-area">
-    <button class="upload-btn" onclick="document.getElementById('photoInput').click()">✦ Add More Photos ✦</button>
-    <br>
     <button class="upload-btn btn-gold" onclick="goToLetter()">Continue to Her Letter →</button>
-    <p class="upload-note">her photos are loading automatically 💕</p>
   </div>
 </section>
 
@@ -273,8 +270,8 @@ const GITHUB_USER = 'MokshayagnaAdapa';
 const GITHUB_REPO = 'Nani-Adapa';
 const GITHUB_BRANCH = 'main';
 const PHOTO_NAMES = [
-  'Sruthi-1.jpeg','Sruthi-2.jpeg','Sruthi-3.jpeg','Sruthi-4.jpeg','Sruthi-5.jpeg',
-  'Sruthi-6.jpeg','Sruthi-7.jpeg','Sruthi-8.jpeg','Sruthi-9.jpeg','Sruthi-10.jpeg'
+  'Sruthi-1.jpeg','Sruthi-3.jpeg','Sruthi-4.jpeg','Sruthi-5.jpeg',
+  'Sruthi-6.jpeg','Sruthi-7.jpeg','Sruthi-9.jpeg','Sruthi-10.jpeg'
 ];
 
 // Build raw GitHub URLs
@@ -474,7 +471,7 @@ function cutCake(){
 
     // Use Sruthi-1 (first photo) as full-screen background on celebration
     const bgImg=document.getElementById('celeb-bg-img');
-    const bgSrc = ghUrl('Sruthi-1.jpeg');
+    const bgSrc = ghUrl('Sruthi-2.jpeg');
     bgImg.style.display='block';
     bgImg.src=bgSrc;
     bgImg.crossOrigin='anonymous';
